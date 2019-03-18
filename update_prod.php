@@ -2,6 +2,7 @@
 $id = isset($_GET['id']) ? $_GET['id'] : die('ERROR: missing ID.');
 
 include_once 'config/database.php';
+include_once 'config/partials.php';
 include_once 'controller/product.php';
 include_once 'controller/category.php';
 
@@ -14,7 +15,7 @@ $product->id = $id;
 $product->readOne();
 
 $page_title = "Update Product";
-include_once "views/partials/header.php";
+include_once $header;
  
 if($_POST){
     $product->name = $_POST['name'];
@@ -94,5 +95,5 @@ echo "</div>";
 	</table>
 </form>
 <?php
-include_once "views/partials/footer.php";
+include_once $footer;
 ?>

@@ -1,6 +1,7 @@
 <?php
 include_once 'config/database.php';
 include_once 'config/pagination.php';
+include_once 'config/partials.php';
 include_once 'controller/product.php';
 include_once 'controller/category.php';
  
@@ -13,7 +14,7 @@ $stmt = $product->readAll($from_record_num, $records_per_page);
 $num = $stmt->rowCount();
 
 $page_title = "Read Products";
-include_once "views/partials/header.php";
+include_once $header;
 
 if($num > 0){
     include_once "views/partials/read.php";
@@ -24,5 +25,5 @@ if($num > 0){
 $page_url = "index.php?";
 $total_rows = $product->countAll();
 include_once 'paging.php';
-include_once "views/partials/footer.php";
+include_once $footer;
 ?>
