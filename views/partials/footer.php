@@ -5,10 +5,8 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
 
   <script>
-// JavaScript for deleting product
 $(document).on('click', '.delete-object', function(){
-
-	var id = $(this).attr('delete-id');
+	var id = $(this).attr('data-delete-id');
 
 	bootbox.confirm({
 		message: "<h4>Are you sure?</h4>",
@@ -21,11 +19,9 @@ $(document).on('click', '.delete-object', function(){
 				label: '<span class="glyphicon glyphicon-remove"></span> No',
 				className: 'btn-primary'
 			}
-		},
-		callback: function (result) {
-
+		}, callback: function (result) {
 			if(result == true){
-				$.post('delete_prod.php', {
+				$.post('delete_blog.php', {
 					object_id: id
 				}, function(data){
 					location.reload();
