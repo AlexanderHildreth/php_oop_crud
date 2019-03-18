@@ -1,12 +1,11 @@
 <?php
-class Product{
+class Blog{
     private $conn;
-    private $table_name = "products";
+    private $table_name = "posts";
 
     public $id;
-    public $name;
-    public $price;
-    public $description;
+    public $title;
+    public $post;
     public $category_id;
     public $image;
     public $timestamp;
@@ -16,20 +15,18 @@ class Product{
     }
 
     function create(){
-        $query = "INSERT INTO " . $this->table_name . " SET name=:name, price=:price, description=:description, category_id=:category_id, image=:image, created=:created";
+        $query = "INSERT INTO " . $this->table_name . " SET title=:title, post=:post, category_id=:category_id, image=:image, created=:created";
 
         $stmt = $this->conn->prepare($query);
         
-        $this->name = htmlspecialchars(strip_tags($this->name));
-        $this->price = htmlspecialchars(strip_tags($this->price));
-        $this->description = htmlspecialchars(strip_tags($this->description));
+        $this->title = htmlspecialchars(strip_tags($this->title));
+        $this->post = htmlspecialchars(strip_tags($this->post));
         $this->category_id = htmlspecialchars(strip_tags($this->category_id));
         $this->image = htmlspecialchars(strip_tags($this->image));
         $this->timestamp = date('Y-m-d H:i:s');
 
-        $stmt->bindParam(":name", $this->name);
-        $stmt->bindParam(":price", $this->price);
-        $stmt->bindParam(":description", $this->description);
+        $stmt->bindParam(":title", $this->title);
+        $stmt->bindParam(":post", $this->post);
         $stmt->bindParam(":category_id", $this->category_id);
         $stmt->bindParam(":image", $this->image);
         $stmt->bindParam(":created", $this->timestamp);
@@ -43,7 +40,7 @@ class Product{
 
     function readAll($from_record_num, $records_per_page){
 
-        $query = "SELECT * FROM " . $this->table_name . " ORDER BY name ASC LIMIT {$from_record_num}, {$records_per_page}";
+        $query = "SELECT * FROM " . $this->table_name . " ORDER BY created DESC LIMIT {$from_record_num}, {$records_per_page}";
 
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
@@ -71,35 +68,35 @@ class Product{
 
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        $this->name = $row['name'];
-        $this->price = $row['price'];
-        $this->description = $row['description'];
+        $this->title = $row['title'];
+        $this->post = $row['post'];
         $this->category_id = $row['category_id'];
         $this->image = $row['image'];
     }
 
     function update(){
-        $query = "UPDATE " . $this->table_name . " SET name = :name, price = :price, description = :description, category_id  = :category_id WHERE id = :id";
+        $query = "UPDATE " . $this->table_name . " SET title=:title, post=:post, category_id=:category_id, image=:image, modified=:modified WHERE id=:id";
 
         $stmt = $this->conn->prepare($query);
 
-        $this->name = htmlspecialchars(strip_tags($this->name));
-        $this->price = htmlspecialchars(strip_tags($this->price));
-        $this->description = htmlspecialchars(strip_tags($this->description));
+        $this->title = htmlspecialchars(strip_tags($this->title));
+        $this->post = htmlspecialchars(strip_tags($this->post));
         $this->category_id = htmlspecialchars(strip_tags($this->category_id));
-        $this->id = htmlspecialchars(strip_tags($this->id));
+        $this->image = htmlspecialchars(strip_tags($this->image));
+        $this->timestamp = date('Y-m-d H:i:s');
 
-        $stmt->bindParam(':name', $this->name);
-        $stmt->bindParam(':price', $this->price);
-        $stmt->bindParam(':description', $this->description);
-        $stmt->bindParam(':category_id', $this->category_id);
+        $stmt->bindParam(":title", $this->title);
+        $stmt->bindParam(":post", $this->post);
+        $stmt->bindParam(":category_id", $this->category_id);
+        $stmt->bindParam(":image", $this->image);
+        $stmt->bindParam(":modified", $this->timestamp);
         $stmt->bindParam(':id', $this->id);
 
         if($stmt->execute()){
             return true;
+        } else {
+            return false;
         }
-
-        return false;
     }
 
     function delete(){
@@ -107,7 +104,7 @@ class Product{
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(1, $this->id);
 
-        if($result = $stmt->execute()){
+        if($stmt->execute()){
             return true;
         } else {
             return false;
@@ -115,7 +112,7 @@ class Product{
     }
 
     public function search($search_term, $from_record_num, $records_per_page){
-        $query = "SELECT c.name as category_name, p.* FROM " . $this->table_name . " p LEFT JOIN categories c ON (p.category_id=c.id) WHERE p.name LIKE ? OR p.description LIKE ? ORDER BY p.name ASC LIMIT ?, ?";
+        $query = "SELECT c.post as category_post, p.* FROM " . $this->table_name . " p LEFT JOIN categories c ON (p.category_id=c.id) WHERE p.post LIKE ? OR p.post LIKE ? ORDER BY p.post ASC LIMIT ?, ?";
 
         $stmt = $this->conn->prepare($query);
 
@@ -130,7 +127,7 @@ class Product{
     }
 
     public function countAll_BySearch($search_term) {
-        $query = "SELECT COUNT(*) as total_rows FROM " . $this->table_name . " p LEFT JOIN categories c ON p.category_id = c.id WHERE p.name LIKE ?";
+        $query = "SELECT COUNT(*) as total_rows FROM " . $this->table_name . " p LEFT JOIN categories c ON p.category_id = c.id WHERE p.post LIKE ?";
 
         $stmt = $this->conn->prepare( $query );
 
@@ -154,7 +151,7 @@ class Product{
 
             $check = getimagesize($_FILES["image"]["tmp_name"]);
             if($check!==false){
-    // submitted file is an image
+            // submitted file is an image
             } else {
                 $file_upload_error_messages.="<div>Submitted file is not an image.</div>";
             }
@@ -165,7 +162,7 @@ class Product{
             }
 
             if(file_exists($target_file)){
-                $file_upload_error_messages .= "<div>Image already exists. Try to change file name.</div>";
+                $file_upload_error_messages .= "<div>Image already exists. Try to change file post.</div>";
             } 
 
             if($_FILES['image']['size'] > (2048000)){
@@ -183,15 +180,19 @@ class Product{
                     $result_message .= "<div>Unable to upload photo.</div>";
                     $result_message .= "<div>Update the record to upload photo.</div>";
                     $result_message .= "</div>";
+                    
+                    $_SESSION['success'] .= $result_message;
                 }
             } else {
-                $result_message.="<div class='alert alert-danger'>";
-                $result_message.="{$file_upload_error_messages}";
-                $result_message.="<div>Update the record to upload photo.</div>";
-                $result_message.="</div>";
+                $result_message .= "<div class='alert alert-danger'>";
+                $result_message .= "{$file_upload_error_messages}";
+                $result_message .= "<div>Update the record to upload photo.</div>";
+                $result_message .= "</div>";
+
+                $_SESSION['error'] .= $result_message;
             }
         }
 
-        return $result_message;
+        return true;
     }
 }

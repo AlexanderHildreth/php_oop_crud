@@ -1,21 +1,16 @@
 <table class='table table-hover table-responsive table-bordered'>
     <tr>
         <td>Name</td>
-        <td><?php echo $product->name ?></td>
-    </tr>
-
-    <tr>
-        <td>Price</td>
-        <td>R <?php echo $product->price ?></td>
+        <td><?php echo $blog->title ?></td>
     </tr>
     <tr>
-        <td>Description</td>
-        <td><?php echo $product->description ?></td>
+        <td>Blog Post</td>
+        <td><?php echo $blog->post ?></td>
     </tr>
     <tr>
         <td>Category</td>
         <td><?php
-        $category->id = $product->category_id;
+        $category->id = $blog->category_id;
         $category->readName();
         echo $category->name;
         ?></td>
@@ -23,7 +18,7 @@
     <tr>
     <td>Image</td>
     <td>
-        <?php echo $product->image ? "<img src='uploads/{$product->image}' style='width:300px;' />" : "No image found." ?>
+        <?php echo $blog->image ? "<img src='uploads/{$blog->image}' style='width:300px;' />" : "No image found." ?>
     </td>
 </tr>
 </table>
