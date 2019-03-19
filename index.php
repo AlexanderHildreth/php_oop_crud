@@ -16,19 +16,11 @@ $num = $stmt->rowCount();
 $page_title = "Blog Posts";
 include_once $header;
 ?>
-<form role='search' action='search.php'>
-	<div class='input-group col-lg-3 col-md-3 col-sm-6 col-xs-6 pull-left margin-right-1em'>
-		<?php $search_value = isset($search_term) ? "value='{$search_term}'" : "" ?>
-		<input type='text' class='form-control' placeholder='Type post title name or post...' name='search' id='search-term' required <?php echo $search_value ?> />
-		<div class='input-group-btn'>
-			<button class='btn btn-primary' type='submit'><i class='glyphicon glyphicon-search'></i></button>
-		</div>
-	</div>
-</form>
 
 <div class='right-button-margin'>
 	<a href='create_blog.php' class='btn btn-default pull-right'>Create Post</a>
 </div>
+
 <?php
 if ($_SESSION['success']) {
 	echo $_SESSION['success'];
