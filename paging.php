@@ -11,7 +11,7 @@ $range = 2;
 $initial_num = $page - $range;
 $condition_limit_num = ($page + $range)  + 1;
  
-for ($x=$initial_num; $x<$condition_limit_num; $x++) {
+for ($x = $initial_num; $x < $condition_limit_num; $x++) {
     if (($x > 0) && ($x <= $total_pages)) { 
         if ($x == $page) {
             echo "<li class='active'><a href=\"#\">$x <span class=\"sr-only\">(current)</span></a></li>";

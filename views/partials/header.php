@@ -14,7 +14,16 @@
   
 </head>
 <body>
-    <?php session_start(); ?>
+    <?php 
+    session_start(); 
+   /*if( $_SESSION['last_activity'] < time() - $_SESSION['expire_time'] ) { 
+      $_SESSION['logged'] = false;
+      $_SESSION['error'] = "<div class='alert alert-danger alert-dismissable'><i class='fa fa-exclamation-circle'></i> You're not logged in!<button type='button' class='close' data-dismiss='alert'>&times;</button></div>";
+      // header('Location:index.php');
+    } else{
+        $_SESSION['last_activity'] = time();
+    }*/
+    ?> 
     <nav class="navbar navbar-default">
       <div class="container-fluid">
         <div class="navbar-header">
@@ -25,13 +34,15 @@
             <span class="icon-bar"></span>
           </button>
           <a class="navbar-brand" href="index.php">
-            <!-- <h2 class="brand-logo"> --><i class="fa fa-terminal" aria-hidden="true"></i> Decoded<!-- </h2> -->
+           <i class="fa fa-terminal" aria-hidden="true"></i> Decoded
           </a>
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
             <li><a href="index.php">Posts</a></li>
-            <li><a href="create_blog.php">Create Post</a></li>
+            <?php if($_SESSION['logged']) { ?>
+              <li><a href="create_blog.php">Create Post</a></li>
+            <?php } ?>
           </ul>
           <form role='search' class="navbar-form navbar-right" action='search.php'>
             <div class='input-group margin-right-1em'>
@@ -46,19 +57,21 @@
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">User <span class="caret"></span></a>
               <ul class="dropdown-menu">
-                <li><a href="login.php">Register</a></li>
-                <li><a href="login.php">Login</a></li>
-                <li><a href="logout.php">Logout</a></li>
+                <?php if (!$_SESSION['logged']) { ?>
+                  <li><a href="login.php">Login</a></li>
+                  <li><a href="register.php">Register</a></li>
+                <?php } else { ?>
+                  <li><a href="logout.php">Logout</a></li>
+                <?php } ?>
               </ul>
             </li>
           </ul>
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container-fluid -->
     </nav>
-    <div class="row">
-        <div class="container">
-            <?php
-            echo "<div class='page-header'>
-                    <h1>{$page_title}</h1>
-                </div>";
-            ?>
+    <div class="container">
+        <?php
+        echo "<div class='page-header'>
+                <h1>{$page_title}</h1>
+            </div>";
+        ?>

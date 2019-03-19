@@ -7,22 +7,37 @@ $database = new Database();
 $db = $database->getConnection();
 $auth = new auth($db);
 
-$page_title = "Login";
+$page_title = "Register";
 include_once $header;
-if (isset($_POST['login']) && !empty($_POST['username']) && !empty($_POST['password'])) {
 
+$_SESSION['error'] = '';
+$_SESSION['success'] = '';
 
-	if ($_POST['email'] == ''  && $_POST['password'] == '') {
-		$_SESSION['logged'] = true;
-		$_SESSION['timeout'] = time();
-		$_SESSION['username'] = ;
-
-		$_SESSION['success'] .= "<div class='alert alert-success alert-dismissable'><i class='fa fa-check-circle'></i> Successfully logged in <button type='button' class='close' data-dismiss='alert'>&times;</button></div>";
-		header("location:index.php");
+if ($_POST) {
+	
+	if($_POST['password'] == $_POST['confirm_password']) {
+		$auth->first_name = $_POST['first_name'];
+		$auth->last_name = $_POST['last_name'];
+		$auth->email = $_POST['email'];
+		$auth->password = $_POST['password'];
 	} else {
-		echo "<div class='alert alert-danger alert-dismissable'><i class='fa fa-exclamation-circle'></i> Error: Email and/or password incorrect <button type='button' class='close' data-dismiss='alert'>&times;</button></div>";
+		$_SESSION['error'] = "<div class='alert alert-danger alert-dismissable'><i class='fa fa-exclamation-circle'></i> Error: Passwords do not match!<button type='button' class='close' data-dismiss='alert'>&times;</button></div>";
+			header("location:register.php");
+	}
+	
+	if ($auth->register()) {
+		if($auth->login($auth->email, $auth->password)){
+			$_SESSION['logged'] = true;
+			$_SESSION['last_activity'] = time();
+			$_SESSION['expire_time'] = (1 * 60 * 60) + 1;
+			$_SESSION['username'] = $auth->first_name . ' ' . $auth->last_name;
+			$_SESSION['success'] = "<div class='alert alert-success alert-dismissable'><i class='fa fa-check-circle'></i> Successfully logged in <button type='button' class='close' data-dismiss='alert'>&times;</button></div>";
+			header("location:index.php");
+		}
+	} else {
+		echo "<div class='alert alert-danger alert-dismissable'><i class='fa fa-exclamation-circle'></i> " . $_SESSION['error'] . "<button type='button' class='close' data-dismiss='alert'>&times;</button></div>";
 	}
 }
 
-require 'views/login.php';
+require 'views/register.php';
 include_once $footer;
