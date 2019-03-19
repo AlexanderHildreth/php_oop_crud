@@ -112,7 +112,7 @@ class Blog{
     }
 
     public function search($search_term, $from_record_num, $records_per_page){
-        $query = "SELECT c.post as category_post, p.* FROM " . $this->table_name . " p LEFT JOIN categories c ON (p.category_id=c.id) WHERE p.post LIKE ? OR p.post LIKE ? ORDER BY p.post ASC LIMIT ?, ?";
+        $query = "SELECT c.name as category_name, p.* FROM " . $this->table_name . " p LEFT JOIN categories c ON (p.category_id=c.id) WHERE p.post LIKE ? OR p.title LIKE ? ORDER BY p.post ASC LIMIT ?, ?";
 
         $stmt = $this->conn->prepare($query);
 
