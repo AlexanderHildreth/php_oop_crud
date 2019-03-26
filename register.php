@@ -5,7 +5,7 @@ include_once 'controller/auth.php';
 
 $database = new Database();
 $db = $database->getConnection();
-$auth = new auth($db);
+$auth = new Auth($db, $session);
 
 $page_title = "Register";
 include_once $header;

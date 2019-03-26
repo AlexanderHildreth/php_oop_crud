@@ -1,5 +1,7 @@
 <?php
-	session_start();
+	require_once 'controller/session.php'
+	$session = new Session();
+	
 	$_SESSION['logged'] = false;
 	unset($_SESSION['success']);
 	unset($_SESSION['error']);

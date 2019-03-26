@@ -1,5 +1,5 @@
 <?php
-class auth {
+class Auth {
 	private $conn;
     private $table_name = "users";
 
@@ -9,9 +9,11 @@ class auth {
     public $email;
     public $password;
     public $timestamp;
+    public $session;
 
-    public function __construct($db){
+    public function __construct($db, $session){
         $this->conn = $db;
+        $this->session = $session;
     }
 
     function register() {
@@ -44,7 +46,7 @@ class auth {
 	            return false;
 	        }	
         } else {
-        	$_SESSION['error'] = 'Error: Email address already exists!';
+        	$this->session->setError = 'Error: Email address already exists!';
         }
 
     }
@@ -65,7 +67,7 @@ class auth {
 
 	        return true;
         } else {
-        	$_SESSION['error'] = 'Password incorrect!';
+        	$this->session->setError = 'Password incorrect!';
 
         	return false;
         }

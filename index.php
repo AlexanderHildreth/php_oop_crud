@@ -15,6 +15,12 @@ $num = $stmt->rowCount();
 
 $page_title = "Blog Posts";
 include_once $header;
+
+if ($_SESSION['success']) {
+	echo $_SESSION['success'];
+} else {
+	echo $_SESSION['error'];
+}
 ?>
 
 <div class='right-button-margin'>
@@ -22,11 +28,6 @@ include_once $header;
 </div>
 
 <?php
-if ($_SESSION['success']) {
-	echo $_SESSION['success'];
-} else {
-	echo $_SESSION['error'];
-}
 if($num > 0){
 	include_once "views/read.php";
 } else {
