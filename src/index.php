@@ -1,9 +1,12 @@
 <?php
-include_once 'config/database.php';
-include_once 'config/pagination.php';
-include_once 'config/partials.php';
-include_once 'controller/blog.php';
-include_once 'controller/category.php';
+/* $dir = scandir('./config');
+print_r($dir);
+print('<br />'); */
+include_once __DIR__ . '/config/database.php';
+include_once __DIR__ . '/config/pagination.php';
+include_once __DIR__ . '/config/partials.php';
+include_once __DIR__ . '/controller/blog.php';
+include_once __DIR__ . '/controller/category.php';
 
 $database = new Database();
 $db = $database->getConnection();
@@ -15,6 +18,7 @@ $num = $stmt->rowCount();
 
 $page_title = "Blog Posts";
 include_once $header;
+
 ?>
 
 <div class='right-button-margin'>

@@ -15,7 +15,7 @@
 </head>
 <body>
     <?php 
-    session_start(); 
+    // session_start(); 
    /*if( $_SESSION['last_activity'] < time() - $_SESSION['expire_time'] ) { 
       $_SESSION['logged'] = false;
       $_SESSION['error'] = "<div class='alert alert-danger alert-dismissable'><i class='fa fa-exclamation-circle'></i> You're not logged in!<button type='button' class='close' data-dismiss='alert'>&times;</button></div>";

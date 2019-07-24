@@ -22,7 +22,7 @@ SET time_zone = "+00:00";
 -- Database: `oop_curd`
 --
 CREATE DATABASE IF NOT EXISTS `oop_crud` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `oop_curd`;
+USE `oop_crud`;
 
 -- --------------------------------------------------------
 
