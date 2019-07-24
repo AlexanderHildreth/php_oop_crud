@@ -1,3 +1,3 @@
 <?php 
-$header = require(__DIR__ . '/../views/partials/header.php');
-$footer = require(__DIR__ . '/../views/partials/footer.php');
+$header = __DIR__ . '/../views/partials/header.php';
+$footer = __DIR__ . '/../views/partials/footer.php';
