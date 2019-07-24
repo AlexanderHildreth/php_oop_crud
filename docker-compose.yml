@@ -1,0 +1,14 @@
+version: '1.5'
+
+services:
+  website:
+    container_name: crud_php
+      image: php_image:latest
+    build:
+      dockerfile: Dockerfile
+      context: ./
+    volumes:
+      - ".:/var/www/html/"
+    ports:
+      - 9000:9000
+
