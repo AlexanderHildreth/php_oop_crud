@@ -1,5 +1,5 @@
 -- Host: mysql
--- Server version: 5.7.x
+-- Server version: 8
 -- PHP Version: 7.3.x
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
