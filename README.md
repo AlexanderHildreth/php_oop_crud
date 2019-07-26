@@ -17,6 +17,6 @@ That is all that is required.
 * Docker-compose
 
 ## Technologies/Software
-* PHP 7.3.X
+* PHP 7.3
 * Docker & Docker-compose
-* MySQL 5.6
+* MySQL 8
