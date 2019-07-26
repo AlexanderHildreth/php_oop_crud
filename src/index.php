@@ -2,11 +2,11 @@
 /* $dir = scandir('./config');
 print_r($dir);
 print('<br />'); */
-include_once __DIR__ . '/config/database.php';
-include_once __DIR__ . '/config/pagination.php';
-include_once __DIR__ . '/config/partials.php';
-include_once __DIR__ . '/controller/blog.php';
-include_once __DIR__ . '/controller/category.php';
+include_once __DIR__ . '/system/config/database.php';
+include_once __DIR__ . '/system/config/pagination.php';
+include_once __DIR__ . '/system/config/partials.php';
+include_once __DIR__ . '/system/engine/blog.php';
+include_once __DIR__ . '/system/engine/category.php';
 
 $database = new Database();
 $db = $database->getConnection();
@@ -16,9 +16,8 @@ $category = new Category($db);
 $stmt = $blog->readAll($from_record_num, $records_per_page);
 $num = $stmt->rowCount();
 
-$page_title = "Blog Posts";
+$page_title = "OOP CRUD";
 include_once $header;
-
 ?>
 
 <div class='right-button-margin'>
@@ -31,6 +30,7 @@ if ($_SESSION['success']) {
 } else {
 	echo $_SESSION['error'];
 }
+
 if($num > 0){
 	include_once "views/read.php";
 } else {

@@ -1,8 +1,8 @@
 <?php
-require 'config/database.php';
-require 'config/partials.php';
-require 'controller/blog.php';
-require 'controller/category.php';
+include_once __DIR__ . '/config/database.php';
+include_once __DIR__ . '/config/partials.php';
+include_once __DIR__ . '/controller/blog.php';
+include_once __DIR__ . '/controller/category.php';
 
 $database = new Database();
 $db = $database->getConnection();

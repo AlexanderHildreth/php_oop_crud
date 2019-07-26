@@ -1,5 +1,7 @@
 <?php
-class Database {
+
+class Database 
+{
 	// this hostname needs to stay as is. because the PHP is a different service, the link is established in the docker-compose.yml file. If it does change,
 	// it needs to match the name of the link under the "website" service
 	private $host = "mysql";
