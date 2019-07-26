@@ -1,11 +1,6 @@
--- phpMyAdmin SQL Dump
--- version 4.8.3
--- https://www.phpmyadmin.net/
---
--- Host: 127.0.0.1:3306
--- Generation Time: Mar 19, 2019 at 05:18 PM
--- Server version: 5.7.23
--- PHP Version: 5.6.38
+-- Host: mysql
+-- Server version: 5.7.x
+-- PHP Version: 7.3.x
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,7 +14,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `oop_curd`
+-- Database: `oop_crud`
 --
 CREATE DATABASE IF NOT EXISTS `oop_crud` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
 USE `oop_crud`;
