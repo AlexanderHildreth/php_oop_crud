@@ -1,4 +1,6 @@
-uploads/*.jpg
-config/database.php
 .idea
-scripts
+config/*.php
+src/*.php
+src/dist
+src/uploads
+src/views
