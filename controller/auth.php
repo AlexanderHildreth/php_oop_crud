@@ -1,4 +1,6 @@
 <?php
+require_once '/controller/session.php';
+
 class Auth {
 	private $conn;
     private $table_name = "users";
@@ -11,9 +13,9 @@ class Auth {
     public $timestamp;
     public $session;
 
-    public function __construct($db, $session){
+    public function __construct($db){
         $this->conn = $db;
-        $this->session = $session;
+        $session = new Session;
     }
 
     function register() {
@@ -46,7 +48,8 @@ class Auth {
 	            return false;
 	        }	
         } else {
-        	$this->session->setError = 'Error: Email address already exists!';
+        	$error = 'Error: Email address already exists!';
+        	$session->setError($error);
         }
 
     }
@@ -67,7 +70,8 @@ class Auth {
 
 	        return true;
         } else {
-        	$this->session->setError = 'Password incorrect!';
+        	$error = 'Password incorrect!';
+        	$session->setError($error);
 
         	return false;
         }

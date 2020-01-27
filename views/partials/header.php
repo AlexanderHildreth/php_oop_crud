@@ -15,9 +15,9 @@
 </head>
 <body>
     <?php 
-    include_once "controller/session.php";
+    include_once "config/session.php";
 
-    $session = new Session();
+    $session = new Sesh();
    /*if( $_SESSION['last_activity'] < time() - $_SESSION['expire_time'] ) { 
       $_SESSION['logged'] = false;
       $_SESSION['error'] = "<div class='alert alert-danger alert-dismissable'><i class='fa fa-exclamation-circle'></i> You're not logged in!<button type='button' class='close' data-dismiss='alert'>&times;</button></div>";
@@ -42,7 +42,7 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
             <li><a href="index.php">Posts</a></li>
-            <?php if($_SESSION['logged']) { ?>
+            <?php if($session->logged) { ?>
               <li><a href="create_blog.php">Create Post</a></li>
             <?php } ?>
           </ul>
@@ -59,7 +59,7 @@
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">User <span class="caret"></span></a>
               <ul class="dropdown-menu">
-                <?php if (!$_SESSION['logged']) { ?>
+                <?php if (!$$session->logged) { ?>
                   <li><a href="login.php">Login</a></li>
                   <li><a href="register.php">Register</a></li>
                 <?php } else { ?>

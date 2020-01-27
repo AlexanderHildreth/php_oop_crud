@@ -16,10 +16,8 @@ $num = $stmt->rowCount();
 $page_title = "Blog Posts";
 include_once $header;
 
-if ($_SESSION['success']) {
-	echo $_SESSION['success'];
-} else {
-	echo $_SESSION['error'];
+if ($session->message) {
+	$session->message();
 }
 ?>
 

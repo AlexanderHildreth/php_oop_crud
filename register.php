@@ -3,18 +3,16 @@ include_once 'config/database.php';
 include_once 'config/partials.php';
 include_once 'controller/auth.php';
 
-$database = new Database();
-$db = $database->getConnection();
-$auth = new Auth($db, $session);
-
-$page_title = "Register";
 include_once $header;
 
-$_SESSION['error'] = '';
-$_SESSION['success'] = '';
+$database = new Database();
+$db = $database->getConnection();
+$auth = new Auth($db);
+
+$page_title = "Register";
+
 
 if ($_POST) {
-	
 	if($_POST['password'] == $_POST['confirm_password']) {
 		$auth->first_name = $_POST['first_name'];
 		$auth->last_name = $_POST['last_name'];

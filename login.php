@@ -5,7 +5,7 @@ include_once 'controller/auth.php';
 
 $database = new Database();
 $db = $database->getConnection();
-$auth = new Auth($db, $session);
+$auth = new Auth($db);
 
 $page_title = "Login";
 include_once $header;

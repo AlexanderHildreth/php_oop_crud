@@ -2,19 +2,22 @@
 class Session {
 	public $logged;
 	public $error;
-	public $success; 
+	public $success;
+	public $message; 
 
 	public function __construct(){
 		session_start();
-
-        $this->session = $_SESSION;
     }
 
     public function setError($error) {
-    	$this->error = $error;
+    	$this->message = $error;
     }
 
     public function setSuccess($success) {
-    	$this->success = $success;
+    	$this->message = $success;
+    }
+
+    public function parTest() {
+    	print_r('test');
     }
 }
