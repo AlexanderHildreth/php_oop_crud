@@ -1,3 +1,6 @@
 uploads/*.jpg
 
-config/database.php
+config/*.php
+
+views/
+uploads/
