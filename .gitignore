@@ -1,6 +1,5 @@
 uploads/*.jpg
-
 config/*.php
-
 views/
 uploads/
+dist/
