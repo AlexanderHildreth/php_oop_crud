@@ -3,3 +3,4 @@ config/*.php
 views/
 uploads/
 dist/
+*.php
