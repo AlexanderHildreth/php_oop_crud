@@ -1,4 +1,7 @@
 <?php
+
+// namespace Auth;
+
 class auth {
 	private $conn;
     private $table_name = "users";
@@ -10,11 +13,12 @@ class auth {
     public $password;
     public $timestamp;
 
-    public function __construct($db){
+	public function __construct($db)
+	{
         $this->conn = $db;
     }
 
-    function register() {
+    public function register() {
     	$query = "SELECT COUNT(*) as total_rows FROM " . $this->table_name . " WHERE email=`" . $this->email . "`";
         $check = $this->conn->prepare($query);
         $check->execute();

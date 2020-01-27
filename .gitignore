@@ -1,6 +1,6 @@
-uploads/*.jpg
+.idea
 config/*.php
-views/
-uploads/
-dist/
-*.php
+src/*.php
+src/dist
+src/uploads
+src/views
